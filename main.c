@@ -11,7 +11,8 @@
 #include <unistd.h>
 #endif
 
-char* getinput() {
+char* getinput() 
+{
 	char buf[101];
 	fgets(buf, 101, stdin);
 	char* dyn = malloc(strlen(buf) * sizeof(char)); 
@@ -19,9 +20,31 @@ char* getinput() {
 	return dyn;
 }
 
-int main() {
-	char* input = getinput();
-	fputs(input, stdout);
-	free(input);
+int main() 
+{
+	bool gamerunning = true;
+
+	while (gamerunning) 
+	{
+		// print prompt and get input
+		printf("(help) --> ");
+		char* input = getinput();
+		
+		// check the input and run stuff accordingly
+		if (strcmp(input, "help\n") == 0) 
+		{
+			puts("This is a help page");
+		}  
+		else if (strcmp(input, "quit\n") == 0) 
+		{
+			break;
+		}
+		else 
+		{
+			puts("Command unknown");
+		}
+			
+		free(input);
+	}
 	return 0;
 }
